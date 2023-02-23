@@ -1,8 +1,8 @@
 import React,{ useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
-import Spinner from './Spinner';
+//import Spinner from './Spinner';
 import PropTypes from 'prop-types';
-import InfiniteScroll from "react-infinite-scroll-component";
+import loading1 from "../loading.gif"
 
 const News = (props) => {
 
@@ -12,14 +12,16 @@ const News = (props) => {
     const [totalResults,setTotalResults] = useState(0);
 
     const updateNews = async ()=>{
-      props.setProgress(10);
-      let url = `https://newsdata.io/api/1/news?apikey=pub_176249990e087243133b3e1fd6cc5c617a399&country=${props.country}&category=${props.newsCatogory}`;/* https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.newsCatogory}&apiKey=2b0d7f012f5f466489b1c7e0860d8129&page=${page}&pageSize=${props.pageSize}` */
+      props.setProgress(5);
+      let url = `https://newsdata.io/api/1/news?apikey=pub_176249990e087243133b3e1fd6cc5c617a399&country=${props.country}&category=${props.newsCatogory}`;
+      /* https://newsdata.io/api/1/news?apikey=pub_176249990e087243133b3e1fd6cc5c617a399&country=${props.country}&category=${props.newsCatogory}https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.newsCatogory}&apiKey=2b0d7f012f5f466489b1c7e0860d8129&page=${page}&pageSize=${props.pageSize}` */
       setLoading(true); 
       let data = await fetch(url);
       let parsedData = await data.json();
       setArticles(parsedData.results);
       setTotalResults(parsedData.totalResults);
       setLoading(false);
+      props.setProgress(100);
       
     }
     useEffect( () => {
@@ -53,7 +55,7 @@ const News = (props) => {
       setLoading(false);
     } */
 
-    const fetchMoreData = async () => {
+   const fetchMoreData = async () => {
       setPage(page + 1)
 
       let url = `https://newsdata.io/api/1/news?apikey=pub_176249990e087243133b3e1fd6cc5c617a399&country=${props.country}&category=${props.newsCatogory}`;
@@ -88,7 +90,7 @@ const News = (props) => {
 
 
   
-   
+   // alert(articles.length);
  
     return (
         <>
@@ -97,20 +99,16 @@ const News = (props) => {
           <div className="text-center">{/* this.state.loading  && <Spinner /> */}</div>
           
         <div className="row">
-        <InfiniteScroll
-          dataLength={articles.length}
-          next={fetchMoreData}
-          hasMore={articles.length !== totalResults}
-          loader={<Spinner />}
-        >
+          
+      
             { articles.map((element)=>{
                 return  <div className="col-md-4" key={element.title}>
                   
-                <NewsItem author={element.author? element.author :"unkhown"} date={element.publishedAt}   description={element.description ? String(element.description).slice(0, 80): ""} title={element.title ? element.title.slice(0, 50): ""}  imageUrl={element.image_url ? element.image_url: ""} newsUrl={element.url ? element.url: ""} />
+                <NewsItem author={element.creator? element.creator :"unkhown"} date={element.pubDate}   description={element.description ? String(element.description).slice(0, 80): ""} title={element.title ? element.title.slice(0, 50): ""}  imageUrl={element.image_url ? element.image_url: "https://i0.wp.com/www.orissapost.com/wp-content/uploads/2023/02/India-Digital-infra-Technology-Investment.jpg?fit=300%2C188=1"} newsUrl={element.url ? element.url: ""} />
             </div>
 
             })}
-           </InfiniteScroll>
+           
         </div>
         
       </div>
@@ -121,7 +119,7 @@ const News = (props) => {
 
 News.defaultProps = {
   country: 'in',
-  pageSize: 2,
+  //pageSize: 2,
   newsCatogory: 'top',
   totalResults:0
 }
@@ -129,7 +127,7 @@ News.defaultProps = {
 News.propTypes = {
 
   country: PropTypes.string,
-  pagesize: PropTypes.number,
+  //pagesize: PropTypes.number,
   newsCatogory: PropTypes.string,
 
 }

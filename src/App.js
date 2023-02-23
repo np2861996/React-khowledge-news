@@ -29,10 +29,10 @@ export default class App extends Component {
         
       />
             <Routes>
-            <Route path="/" element={<News setProgress={this.setProgress} pageSize={10} country='in' newsCatogory='top' />} /> 
+            <Route path="/" element={<News setProgress={this.setProgress} pageSize={20} country='in' newsCatogory='top' />} /> 
               <Route exact path="business"  element={<News setProgress={this.setProgress} key="business" pageSize={10} country='in' newsCatogory='business' />} /> 
               <Route exact path="entertainment"  element={<News setProgress={this.setProgress} key="entertainment" pageSize={10} country='in' newsCatogory='entertainment' />} /> 
-              <Route exact path="top"  element={<News setProgress={this.setProgress} key="top" pageSize={10} country='in' newsCatogory='top' />} /> 
+              <Route exact path="top"  element={<News setProgress={this.setProgress} key="news" pageSize={10} country='in' newsCatogory='top' />} /> 
               <Route exact path="health"   element={<News setProgress={this.setProgress} key="health" pageSize={10} country='in' newsCatogory='health' />} /> 
               <Route exact path="science"  element={<News setProgress={this.setProgress} key="science" pageSize={10} country='in' newsCatogory='science' />} /> 
               <Route exact path="sports"  element={<News setProgress={this.setProgress} key="sports" pageSize={10} country='in' newsCatogory='sports' />} /> 
