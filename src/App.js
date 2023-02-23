@@ -1,12 +1,9 @@
 import './App.css';
-//NewsAPI- 2b0d7f012f5f466489b1c7e0860d8129
 import React, { Component } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar.js';
 import News from './components/News';
 import LoadingBar from 'react-top-loading-bar';
-
-
 
 export default class App extends Component {
 
@@ -38,11 +35,7 @@ export default class App extends Component {
               <Route exact path="sports"  element={<News setProgress={this.setProgress} key="sports" pageSize={10} country='in' newsCatogory='sports' />} /> 
               <Route exact path="technology"  element={<News setProgress={this.setProgress} key="technology" pageSize={10} country='in' newsCatogory='technology' />} /> 
             </Routes>
-        </BrowserRouter>
-        
-      
-       
-        
+        </BrowserRouter>        
       </div>
     )
   }

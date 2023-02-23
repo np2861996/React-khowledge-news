@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import {  Link } from "react-router-dom";
 
 const Navbar = () => {
-  
-
-
     return (
       <div>
             <nav className="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
